@@ -42,3 +42,41 @@ export const useCreateUser = ()=> {
         isSuccess
     };
 };
+
+
+type updateUserType = {
+    name: string,
+    addressLine1: string,
+    city: string,
+    country: string
+}
+
+export const useUpdateUser = () =>{
+
+    const { getAccessTokenSilently } = useAuth0();
+    const updateUserRequest = async (formData : updateUserType) => {
+        const accessToken = await getAccessTokenSilently();
+
+        const response = await fetch(`${API_BASE_URL}/api/user`,{
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+                "Content-type": "Application/json"
+            },
+            body: JSON.stringify(formData),
+        });
+
+        if(!response.ok){
+            throw new Error("Failed to update user");
+        }
+    }
+
+    const {
+        mutateAsync: updateUser,
+        isLoading,
+    } = useMutation(updateUserRequest);
+
+    return { updateUser, isLoading }
+}
+
+
