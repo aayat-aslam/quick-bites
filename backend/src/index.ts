@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import UserRoute from "./roots/UserRoute";
 
 dotenv.config(); // Load environment variables from .env file
 
@@ -14,6 +15,9 @@ app.use(cors());
 app.get("/test", (req: Request, res: Response) => {
     res.json({ message: "Hello" });
 });
+
+//Routes
+app.use("/api/user/", UserRoute);
 
 const PORT = process.env.PORT || 7000; // Use environment variable for port
 
