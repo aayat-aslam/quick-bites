@@ -6,7 +6,9 @@ import {validateUserRequest} from "../middleware/validation";
 const router = express.Router();
 
 
-
+// /api/user/
+// @ts-ignore
+router.get("/", jwtCheck, jwtParse, UserController.getCurrentUser);
 // @ts-ignore
 router.post("/", jwtCheck, UserController.createCurrentUser);
 // @ts-ignore
