@@ -1,12 +1,30 @@
-import { useUpdateUser} from "@/api/UserApi.tsx";
+import {useGetUser, useUpdateUser} from "@/api/UserApi.tsx";
 import UserProfileForm from "@/components/forms/user-profile-form/UserProfileForm.tsx";
+import LoadingScreen from "@/components/LoadingScreen.tsx";
 
 const UserProfilePage = () =>{
-    const {updateUser, isLoading } = useUpdateUser();
+    const { currentUser, isLoading: isGetLoading } = useGetUser();
+    const {updateUser, isLoading: isUpdateLoading } = useUpdateUser();
 
-    return(
+    if(isGetLoading) {
+        return <LoadingScreen
+            loadingText="Loading your profile..."
+            icons={["👤", "📝", "⚙️", "🏆", "🛡️"]}
+        />
+    }
+
+    if(!currentUser){
+        return <div className="flex flex-col items-center">
+            <h5 className="text-xl font-bold tracking-tight text-orange-600 ">
+                Unauthorized!
+            </h5>
+            <span className="font-bold">Unable to load user profile!</span>
+        </div>
+    }
+
+    return (
         <div className="space-x-2">
-            <UserProfileForm onSave={updateUser} isLoading={isLoading}/>
+            <UserProfileForm currentUser={currentUser} onSave={updateUser} isLoading={isUpdateLoading}/>
         </div>
     )
 }

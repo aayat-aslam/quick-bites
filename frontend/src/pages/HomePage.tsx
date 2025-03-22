@@ -10,15 +10,15 @@ const HomePage = () => {
                 <span className="text-xl">Food is just a click away!</span>
             </div>
             <div className="grid md:grid-cols-2 gap-5">
-                <img src={landingImage}/>
+                <img alt="landingImage" src={landingImage}/>
                 <div className="flex flex-col items-center justify-center gap-4 text-center">
                     <span className="font-bold text-3xl tracking-tight">
                         Order takeaway even faster!
                     </span>
                     <span>
-                        Download the MeanEats App for faster ordering and personalised recommendations
+                        Download the QuickBites App for faster ordering and personalised recommendations
                     </span>
-                    <img src={appDownloadImage}/>
+                    <img alt="appDownloadImage" src={appDownloadImage}/>
                 </div>
             </div>
         </div>
