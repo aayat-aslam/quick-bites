@@ -2,6 +2,7 @@ import {useAuth0} from "@auth0/auth0-react";
 import {useCreateUser} from "@/api/UserApi.tsx";
 import {useEffect, useRef} from "react";
 import {useNavigate} from "react-router-dom";
+import LoadingScreen from "@/components/LoadingScreen.tsx";
 
 const AuthCallbackPage = () => {
     const navigate = useNavigate();
@@ -28,7 +29,11 @@ const AuthCallbackPage = () => {
         user
     ]);
 
-    return <>Loading...</>
+    // return <>Loading...</>
+    return <LoadingScreen
+        loadingText="Authenticating your account..."
+        icons={["🔑", "🔒", "🆔", "🛡️", "✅"]}
+    />
 }
 
 export default AuthCallbackPage;

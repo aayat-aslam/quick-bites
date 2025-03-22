@@ -1,14 +1,16 @@
 import {useGetUser, useUpdateUser} from "@/api/UserApi.tsx";
 import UserProfileForm from "@/components/forms/user-profile-form/UserProfileForm.tsx";
+import LoadingScreen from "@/components/LoadingScreen.tsx";
 
 const UserProfilePage = () =>{
     const { currentUser, isLoading: isGetLoading } = useGetUser();
     const {updateUser, isLoading: isUpdateLoading } = useUpdateUser();
 
     if(isGetLoading) {
-        return <div className="flex flex-col items-center">
-            <span>Loading profile...</span>
-        </div>
+        return <LoadingScreen
+            loadingText="Loading your profile..."
+            icons={["👤", "📝", "⚙️", "🏆", "🛡️"]}
+        />
     }
 
     if(!currentUser){
